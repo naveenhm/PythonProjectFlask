@@ -1,5 +1,5 @@
 # PythonProjectFlask
-Web application project using Python Flask
+Web application project using Python, Flask, bootstap, jqurey, Oracle DB, MonetDB, sqlite DB
 
 Pre-requisite:
 
