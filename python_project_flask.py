@@ -50,15 +50,15 @@ def list():
 
 @app.route('/listMonetDB')
 def listMonetDB():
-   con = pymonetdb.connect(username="DM_POS_TSV_MRT_P6", password="Passw0rd", hostname="lnx1588.ch3.prod.i.com", port="50010", database="TSV_PROD_DB_B")
+   con = pymonetdb.connect(username="", password="", hostname="", port="", database="")
    cur = con.cursor()
-   cur.execute("select avp_key,attr_value from \"TSV_249122_SHIPMENT\" ")
+   cur.execute("select avp_key,attr_value from \"TABLE\" ")
    rows = cur.fetchall()
    return render_template("listMonetDB.html",rows = rows)
 
 @app.route('/listOracleDB')
 def listOracleDB():
-   con = cx_Oracle.connect("OPSBLD_IRI_P1/Pass9rx4#@ex04-scan1.ch3.prod.i.com:1521/SV01DWHP")
+   con = cx_Oracle.connect("user/Pass@server:port/servicename")
    cur = con.cursor()
    cur.execute("SELECT DISTINCT  S.SOLTN_ABBR, LGCL_DM_NAME,CLIENT_SHORT_NAME, A.SPEC_ID,  A.SOLTN_PRCS_OPTION_ID,  MRT_DATA_PRCS_NAME, A.REFRESH_FREQUENCY, E.WEEKLY_UPDATE_FLG, E.PERIOD_REFRESH_SCHED FROM CLIENT_SOLTN_PRCS_OPTION A, MDM_CLIENT_MAP B, SOLTN_PRCS_OPTION C, MRT_DATA_PRCS D, CLIENT_SOLTN_SCHED E, LGCL_DM F, SOLTN S WHERE A.SOLTN_ID                = S.SOLTN_ID AND S.SOLTN_ID                = E.SOLTN_ID AND A.CLIENT_ID             = B.CLIENT_ID AND A.CLIENT_ID               = E.CLIENT_ID AND A.SOLTN_ID                = E.SOLTN_ID AND A.SOLTN_PRCS_OPTION_ID    = C.SOLTN_PRCS_OPTION_ID  AND C.MRT_DATA_PRCS_ID        = D.MRT_DATA_PRCS_ID AND A.LGCL_DM_ID              = F.LGCL_DM_ID AND A.SPEC_ID                 = E.SPEC_ID AND A.IS_REQUIRED=1 AND E.IS_REQUIRED=1 AND LGCL_DM_abbr LIKE  '%M' ORDER BY S.SOLTN_ABBR,LGCL_DM_NAME,CLIENT_SHORT_NAME,A.SPEC_ID, MRT_DATA_PRCS_NAME ")
    
